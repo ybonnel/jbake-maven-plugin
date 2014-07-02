@@ -17,6 +17,7 @@ package br.com.ingenieux.mojo.jbake;
  */
 
 import br.com.ingenieux.mojo.jbake.util.DirWatcher;
+import com.orientechnologies.orient.core.Orient;
 import org.apache.maven.plugin.MojoExecutionException;
 import org.apache.maven.plugins.annotations.Mojo;
 
@@ -87,6 +88,7 @@ public class WatchMojo extends GenerateMojo {
 			getLog().info("Finishing");
 
 			stopServer();
+            Orient.instance().shutdown();
 		}
 	}
 
@@ -95,4 +97,8 @@ public class WatchMojo extends GenerateMojo {
 
 	protected void initServer() throws MojoExecutionException {
 	}
+
+    @Override
+    protected void shutdownDatabase() {
+    }
 }
